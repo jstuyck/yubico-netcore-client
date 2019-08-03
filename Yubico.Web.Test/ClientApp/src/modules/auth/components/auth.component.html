@@ -1,0 +1,25 @@
+<div class="placer">
+    <mat-card class="form">
+        <mat-card-title>Yubico Auth Test</mat-card-title>
+        <mat-card-content class="container">
+            <mat-form-field>
+                <input matInput [formControl]="otpInputControl" placeholder="Otp">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [formControl]="clientIDControl" placeholder="Client ID">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [formControl]="apiKeyControl" placeholder="Api Key">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [formControl]="syncControl" placeholder="Sync">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [formControl]="nonceControl" placeholder="Nonce">
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-stroked-button color="primary">Submit</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
