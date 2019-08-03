@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Yubico.Web.Test.FormModel;
@@ -7,13 +8,13 @@ namespace Yubico.Web.Test.Controllers
 {
 
 
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class YubicoClientController : ControllerBase
     {
 
-        [Route("submit")]
         [HttpPost]
+        [Route("auth")]
         public async Task<IActionResult> SubmitAuth([FromBody] AuthFormModel payload)
         {
             YubicoClient client = new YubicoClient(payload.ClientID);
@@ -33,6 +34,7 @@ namespace Yubico.Web.Test.Controllers
                     //response.PublicId
                     // response.UseCounter, response.SessionCounter,
                     //response.Url
+                    return new JsonResult(response);
                 }
                 else
                 {
@@ -41,10 +43,12 @@ namespace Yubico.Web.Test.Controllers
             }
             catch (YubicoValidationFailure yvf)
             {
+                Console.WriteLine(yvf.Message);
+                return new JsonResult(yvf.Message);
                 //OutputField.Text = string.Format("Failure in validation: {0}{1}", yvf.Message, Environment.NewLine);
             }
-            return new OkResult();
-
+           
+            return new NoContentResult();
         }
     }
 }

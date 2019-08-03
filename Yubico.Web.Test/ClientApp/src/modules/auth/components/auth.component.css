@@ -17,3 +17,22 @@
     flex-grow: 1;
     flex-direction: column;
   }
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.mtb-10 {
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+.result {
+  margin-top: 10px;
+  width: 80%;
+}

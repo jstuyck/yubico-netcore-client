@@ -1,25 +1,44 @@
-<div class="placer">
-    <mat-card class="form">
+<div class="placer ">
+    <mat-card class="form mat-elevation-z2" [formGroup]="authform" role="region">
         <mat-card-title>Yubico Auth Test</mat-card-title>
         <mat-card-content class="container">
+            <mat-form-field > 
+                <input matInput #otp type="password" formControlName="otpInputControl" placeholder="Otp" required>
+                <mat-error *ngIf="!otpInputControl">Field required</mat-error>
+                <mat-hint align="start"><strong>Press YubiKey to fill this input</strong> </mat-hint>
+                <mat-hint align="end">{{otp.value.length}} / 44</mat-hint>
+            </mat-form-field>
+            <mat-divider [inset]="true" class="mtb-10"></mat-divider>
+            <span class="mat-typography">Get an api key from :  <a href="https://upgrade.yubico.com/getapikey/">yubico</a></span>
+           
             <mat-form-field>
-                <input matInput [formControl]="otpInputControl" placeholder="Otp">
+                <input matInput formControlName="clientIDControl" placeholder="Client ID" required>
             </mat-form-field>
             <mat-form-field>
-                <input matInput [formControl]="clientIDControl" placeholder="Client ID">
+                <input matInput formControlName="apiKeyControl" placeholder="Api Key" required>
+            </mat-form-field>
+            <mat-divider [inset]="true" class="mtb-10"></mat-divider>
+            <mat-form-field>
+                <input matInput formControlName="syncControl" placeholder="Sync">
+                <mat-hint align="start">Desired sync level in percent</mat-hint>
             </mat-form-field>
             <mat-form-field>
-                <input matInput [formControl]="apiKeyControl" placeholder="Api Key">
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput [formControl]="syncControl" placeholder="Sync">
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput [formControl]="nonceControl" placeholder="Nonce">
+                <input matInput formControlName="nonceControl" placeholder="Nonce" required>
+                <mat-hint align="start">A 16 to 40 character long string with random unique data</mat-hint>
             </mat-form-field>
         </mat-card-content>
-        <mat-card-actions>
-            <button mat-stroked-button color="primary">Submit</button>
+        <mat-card-actions class="actions">
+            <span *ngIf="!authform.valid && !authform.pristine" class="mat-typography mat-primary"> Please Fill all the fields</span>
+            <div class="spacer"></div>
+            <button mat-stroked-button color="primary" (click)="submit()">Submit</button>
         </mat-card-actions>
     </mat-card>
 </div>
+<div class="placer ">
+    <mat-card *ngIf="result" class="result">
+            <pre class="mat-typography">{{ result | json }}</pre>
+    </mat-card>
+</div>
+
+
+

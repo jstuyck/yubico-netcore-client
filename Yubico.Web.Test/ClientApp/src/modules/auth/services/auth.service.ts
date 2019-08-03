@@ -7,12 +7,12 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class AuthService {
-    private apiUrl = "";
+    private apiUrl = "api";
 
     constructor(private http: HttpClient)
     {}
 
-    public Auth(form: AuthFormModel): Observable<AuthResultModel> {
-        return this.http.post<AuthResultModel>(`${this.apiUrl}/auth`,form);
+    public Auth(form: AuthFormModel): Observable<string> {
+        return this.http.post<string>(`${this.apiUrl}/auth`, form);
     }
 }
