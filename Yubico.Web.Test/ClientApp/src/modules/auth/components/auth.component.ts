@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthFormModel } from '../models/authform.model';
 import { AuthService } from '../services/auth.service';
 import { AuthResultModel } from '../models/authresult.model';
@@ -15,16 +15,16 @@ export class YubicoAuthComponent {
 
   constructor(private authsrvc: AuthService) { }
 
-  authform = new FormGroup({
-    otpInputControl: new FormControl('', [Validators.required,
+  authform = new UntypedFormGroup({
+    otpInputControl: new UntypedFormControl('', [Validators.required,
     Validators.minLength(32),
     Validators.maxLength(48)]),
-    clientIDControl: new FormControl('', [Validators.required, Validators.pattern('[0-9]*')]),
-    apiKeyControl: new FormControl('', Validators.required),
-    syncControl: new FormControl(100, [Validators.required,
+    clientIDControl: new UntypedFormControl('', [Validators.required, Validators.pattern('[0-9]*')]),
+    apiKeyControl: new UntypedFormControl('', Validators.required),
+    syncControl: new UntypedFormControl(100, [Validators.required,
     Validators.minLength(0),
     Validators.maxLength(100)]),
-    nonceControl: new FormControl(this.makeRandom())
+    nonceControl: new UntypedFormControl(this.makeRandom())
   });
 
   submit() {
